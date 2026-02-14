@@ -4,6 +4,12 @@ import { VinylPlayer, Track } from "./components/vinyl-player";
 import { LoveLetter } from "./components/love-letter";
 import { MusicPlayer } from "./components/music-player";
 
+// ✅ Import assets so Vite can bundle them
+import img1 from "../resources/img1.jpg";
+import img2 from "../resources/img2.jpg";
+import img3 from "../resources/img3.png";
+import track0 from "../resources/track0.mp3";
+
 // Sample tracks - customize these with your own messages!
 const INITIAL_TRACKS: Track[] = [
   {
@@ -14,7 +20,7 @@ const INITIAL_TRACKS: Track[] = [
     letter: {
       heading: "A Burning Image",
       message: `There are some people you do not stop seeing, even in their absence. They remain impressed upon you. 'Don't regret. Remember.' And I will, not because I try to hold on, but because something in me was permanently rearranged by knowing you existed. Some pieces of you are not only meant to be kept, but carried.`,
-      photoUrl: "src/resources/img1.jpg",
+      photoUrl: img1,  // ✅ use imported variable
     },
   },
   {
@@ -25,7 +31,7 @@ const INITIAL_TRACKS: Track[] = [
     letter: {
       heading: "The Hour That Belongs Only to You",
       message: `If I listen closely enough, I can almost hear the hour that belongs to you. It arrives differently than the others, softer, more golden, as if the world itself lowers its voice out of respect. Before you, time was something that simply passed. Now it waits. Now it gathers itself around the idea of you. And I understand, at last, why sunsets exist, they were waiting for someone like you to be witnessed beside`,
-      photoUrl: "src/resources/img2.jpg",
+      photoUrl: img2,  // ✅ use imported variable
     },
   },
   {
@@ -36,7 +42,7 @@ const INITIAL_TRACKS: Track[] = [
     letter: {
       heading: "A temporary convergance",
       message: `The city was stalled in red, endless lines of cars, flickering brake light and sort of droning against the backdrop of traffic. Inside that suspended moment i accidentally catch your frequency. Nothing moved forward. Outside, strangers waited to arrive somewhere else. Inside, I was somewhere else. Somewhere between one second and the next, i existed at the same time as you. And it felt like a secret the night was keeping for itself. Fragile, ephemeral, and illuminated only in passing`,
-      photoUrl: "src/resources/img3.png",
+      photoUrl: img3,  // ✅ use imported variable
     },
   },
 ];
@@ -48,9 +54,8 @@ export default function App() {
   const [tracks, setTracks] = useState<Track[]>(INITIAL_TRACKS);
   const [selectedTrack, setSelectedTrack] = useState<number | null>(null);
 
-  // You can customize these values
-  const petName = "A good day for a valentine"; // Change this to her name or pet name
-  const audioUrl = "src/resources/track0.mp3"; // Add your audio URL here (optional)
+  const petName = "A good day for a valentine";
+  const audioUrl = track0;  // ✅ use imported variable
 
   const handleEnter = () => {
     setAppState("vinyl-player");
@@ -62,7 +67,6 @@ export default function App() {
   };
 
   const handleLetterClose = () => {
-    // Mark track as unlocked
     setTracks((prevTracks) =>
       prevTracks.map((track) =>
         track.id === selectedTrack ? { ...track, isUnlocked: true } : track
@@ -77,12 +81,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      {/* Landing Page */}
       {appState === "landing" && (
         <LandingPage onEnter={handleEnter} petName={petName} />
       )}
-
-      {/* Vinyl Player */}
       {appState === "vinyl-player" && (
         <VinylPlayer
           tracks={tracks}
@@ -90,8 +91,6 @@ export default function App() {
           currentTrack={tracks.find((t) => t.isUnlocked)?.id || null}
         />
       )}
-
-      {/* Love Letter */}
       {appState === "letter" && currentTrack && (
         <LoveLetter
           track={currentTrack}
@@ -99,8 +98,6 @@ export default function App() {
           isLastTrack={isLastTrack}
         />
       )}
-
-      {/* Music Player (always available after landing) */}
       {appState !== "landing" && <MusicPlayer audioUrl={audioUrl} />}
     </div>
   );

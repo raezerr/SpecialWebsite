@@ -19,7 +19,7 @@ const INITIAL_TRACKS: Track[] = [
     isUnlocked: false,
     letter: {
       heading: "A Burning Image",
-      message: `There are some people you do not stop seeing, even in their absence. They remain impressed upon you. 'Don't regret. Remember.' And I will, not because I try to hold on, but because something in me was permanently rearranged by knowing you existed. Some pieces of you are not only meant to be kept, but carried.`,
+      message: `There are some people you do not stop seeing, even in their absence. They remain impressed upon you. 'Let it live as memory' And I will, not because I try to hold on, but because something in me was permanently rearranged by knowing you existed. Some pieces of you are not only meant to be kept, i carry them with warmth.`,
       photoUrl: img1,  // ✅ use imported variable
     },
   },
